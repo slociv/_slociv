@@ -1,0 +1,28 @@
+match case / 关闭取消匹配大小写 不需要大写也能提示出string
+
+
+http代理国内
+
+1.阿里云镜像站地址：
+  mirrors.aliyun.com 端口：80
+
+2.清华大学镜像站地址：
+  mirrors.tuna.tsinghua.edu.cn 端口：80
+
+3.北京外国语大学镜像站地址：
+  mirror.bfsu.edu.cn 端口：80
+
+4.中国科学院开源协会镜像站地址:
+  IPV4/IPV6: mirrors.opencas.cn 端口：80IPV4/IPV6: mirrors.opencas.org 端口：80IPV4/IPV6: mirrors.opencas.ac.cn 端口：80
+
+5.上海GDG镜像服务器地址:
+  sdk.gdgshanghai.com 端口：8000
+
+6.北京化工大学镜像服务器地址:
+  IPv4: ubuntu.buct.edu.cn/ 端口：80IPv4: ubuntu.buct.cn/ 端口：80IPv6: ubuntu.buct6.edu.cn/ 端口：80
+
+7.大连东软信息学院镜像服务器地址:
+  mirrors.neusoft.edu.cn 端口：80
+
+8.腾讯Bugly 镜像:
+  android-mirror.bugly.qq.com 端口：8080

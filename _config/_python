@@ -1,0 +1,3 @@
+pip config set global.index-url https://mirrors.huaweicloud.com/repository/pypi/simple
+
+永久设置华为源

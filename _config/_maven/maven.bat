@@ -41,3 +41,5 @@ echo.
 echo ^</settings^> >> "%filePath%"
 
 endlocal
+:: 复制设置文件到指定目录，并替换（如果存在）
+copy /Y "%filePath%" "C:\Users\Administrator\.m2\settings.xml"

@@ -1,0 +1,27 @@
+nano /etc/apt/sources.list
+ctrl+k 清除
+shift+insert 粘贴下面文本
+
+# 基础源
+deb [check-valid-until=no] http://archive.debian.org/debian/ stretch main non-free contrib
+deb-src [check-valid-until=no] http://archive.debian.org/debian/ stretch main non-free contrib
+
+# Sercurity Updates源
+deb [check-valid-until=no] http://archive.debian.org/debian-security/ stretch/updates main contrib non-free
+deb-src [check-valid-until=no] http://archive.debian.org/debian-security/ stretch/updates main contrib non-free
+
+# backports源
+deb [check-valid-until=no] http://archive.debian.org/debian/ stretch-backports main non-free contrib
+deb-src [check-valid-until=no] http://archive.debian.org/debian/ stretch-backports main non-free contrib
+
+
+apt update && apt full-upgrade -y && apt autoremove && apt autoclean
+
+apt install sudo htop  wget curl screen screenfetch -y
+
+
+
+
+
+ref :https://luotianyi.vc/7428.html
+https://acytoo.com/ladder/new-racknerd-vps/

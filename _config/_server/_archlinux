@@ -1,0 +1,135 @@
+#系统安装没什么好说的很简单,注意不要安装音频驱动，貌似gdm会自带
+#可以安装的软件 neofetch gedit noto-fonts noto-fonts-cjk noto-fonts-emoji firefox-esr
+sudo vim /etc/pacman.d/mirrorlist
+Server = http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+
+sudo gedit /etc/pacman.conf
+[archlinuxcn]
+#首先这个siglevel可以先设置后注释
+#SigLevel = Optional TrustedOnly
+#Server = http://repo.archlinuxcn.org/$arch
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+sudo pacman -Syu
+# 如果执行 sudo pacman -S archlinuxcn-keyring 有报错 error: archlinuxcn-keyring: Signature from "Jiachen YANG (Arch Linux Packager Signing Key) " is marginal trust，就执行下面的 pacman-key 来手动信任证书，然后再执行 sudo pacman -S archlinuxcn-keyring
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+sudo pacman -S archlinuxcn-keyring
+sudo pacman -S yay
+
+mkdir -p ~/.config/fontconfig
+vim ~/.config/fontconfig/fonts.conf
+
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+<!-- ${XDG_CONFIG_HOME}/fontconfig/fonts.conf
+        - vim:ft=xml:fenc=utf-8:noet:ts=3:sw=3:
+        -->
+<fontconfig>
+ <alias>
+  <family>serif</family>
+  <prefer>
+   <family>Noto Serif</family>
+   <family>Noto Color Emoji</family>
+   <family>Noto Sans CJK SC</family>
+   <family>Noto Sans CJK TC</family>
+   <family>Noto Sans CJK JP</family>
+  </prefer>
+ </alias>
+ <alias>
+  <family>sans-serif</family>
+  <prefer>
+   <family>Noto Sans</family>
+   <family>Noto Color Emoji</family>
+   <family>Noto Sans CJK SC</family>
+   <family>Noto Sans CJK TC</family>
+   <family>Noto Sans CJK JP</family>
+  </prefer>
+ </alias>
+ <alias>
+  <family>monospace</family>
+  <prefer>
+   <family>Noto Sans Mono</family>
+   <family>Noto Color Emoji</family>
+   <family>Noto Sans Mono CJK SC</family>
+   <family>Noto Sans Mono CJK TC</family>
+   <family>Noto Sans Mono CJK JP</family>
+  </prefer>
+ </alias>
+ <match target="font">
+  <edit mode="assign" name="antialias">
+   <bool>true</bool>
+  </edit>
+  <edit mode="assign" name="autohint">
+   <bool>true</bool>
+  </edit>
+  <edit mode="assign" name="dpi">
+   <double>96</double>
+  </edit>
+  <edit mode="assign" name="hinting">
+   <bool>true</bool>
+  </edit>
+  <edit mode="assign" name="hintstyle">
+   <const>hintslight</const>
+  </edit>
+  <edit mode="assign" name="lcdfilter">
+   <const>lcdlight</const>
+  </edit>
+  <edit mode="assign" name="rgba">
+   <const>rgb</const>
+  </edit>
+  <edit mode="assign" name="size">
+   <int>15</int>
+  </edit>
+ </match>
+ <dir>~/.fonts</dir>
+</fontconfig>
+
+#清理字体缓存
+fc-cache -fv
+
+
+
+fcitx5
+
+sudo pacman -S fcitx5-im fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-pinyin-zhwiki
+
+sudo vim /etc/environment
+
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
+INPUT_METHOD=fcitx
+GLFW_IM_MODULE=ibus
+
+打开配置 将 pinyin选中
+
+
+yay -S google-chrome
+
+设置系统为中文
+
+配置locle-gen
+
+sudo vim /etc/locale.gen
+en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+zh_SG.UTF-8 UTF-8
+
+
+
+# 在Ubuntu / Debian上
+sudo vim /etc/default/locale
+
+# 在CentOS / RHEL / Arch Linux 上
+sudo vim /etc/locale.conf
+
+LANG=en_US.UTF-8
+
+
+vim .xprofile
+vim .xinitrc
+vim .bashrc
+#这三个都加上
+export LANG=zh_CN.UTF-8
+export LANGUAGE=zh_CN:en_US

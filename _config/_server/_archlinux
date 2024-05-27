@@ -1,5 +1,5 @@
 #系统安装没什么好说的很简单,注意不要安装音频驱动，貌似gdm会自带
-#可以安装的软件 neofetch gedit noto-fonts noto-fonts-cjk noto-fonts-emoji firefox-esr
+#可以安装的软件 freerdp neofetch gedit noto-fonts noto-fonts-cjk noto-fonts-emoji firefox-esr/firefox早晚卸载暂时使用
 sudo vim /etc/pacman.d/mirrorlist
 Server = http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
 Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
@@ -133,3 +133,52 @@ vim .bashrc
 #这三个都加上
 export LANG=zh_CN.UTF-8
 export LANGUAGE=zh_CN:en_US
+
+xhci_pci	upd72020x-fw
+
+wd719x	wd719x-firmware aur
+
+qla2xxx	linux-firmware-qlogic包
+
+aic94xx	aic94xx-firmware aur
+
+qla1280	linux-firmware-qlogic包
+
+qed	linux-firmware-qlogic包
+
+bfa	linux-firmware-qlogic包
+
+sudo pacman -S linux-firmware-qlogic
+
+yay -S upd72020x-fw wd719x-firmware aic94xx-firmware
+
+
+系统日志报错误
+
+[gg@agl ~]$ journalctl -p 3 -b
+5月 27 08:27:28 agl kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[4] not in IVRS table
+5月 27 08:27:28 agl kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[5] not in IVRS table
+5月 27 08:27:28 agl kernel: AMD-Vi: [Firmware Bug]: : No southbridge IOAPIC found
+5月 27 08:27:28 agl kernel: AMD-Vi: Disabling interrupt remapping
+5月 27 08:27:29 agl kernel: Bluetooth: hci0: Reading supported features failed (-16)
+5月 27 08:27:39 agl gdm-password][987]: gkr-pam: unable to locate daemon control file
+5月 27 08:27:42 agl systemd[1011]: Failed to start Application launched by gnome-session-binary.
+5月 27 08:27:42 agl systemd[1011]: Failed to start Application launched by gnome-session-binary.
+[gg@agl ~]$
+
+
+
+[gg@agl ~]$ sudo dmesg |grep 'DEV_SPECIAL(IOAPIC\|not in IVRS table'
+[    0.085735] AMD-Vi: [Firmware Bug]: : IOAPIC[4] not in IVRS table
+[    0.085737] AMD-Vi: [Firmware Bug]: : IOAPIC[5] not in IVRS table
+[gg@agl ~]$ lspci -nn | egrep "SMBus | IOMMU"
+egrep: warning: egrep is obsolescent; using grep -E
+00:00.2 IOMMU [0806]: Advanced Micro Devices, Inc. [AMD] Raven/Raven2 IOMMU [1022:15d1]
+00:14.0 SMBus [0c05]: Advanced Micro Devices, Inc. [AMD] FCH SMBus Controller [1022:790b] (rev 61)
+[gg@agl ~]$ sudo vim /etc/default/grub
+
+改成这个GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2"
+
+参考文献
+https://askubuntu.com/questions/1392979/no-southbridge-ioapic-found
+https://superuser.com/questions/1052023/ioapic0-not-in-ivrs-table

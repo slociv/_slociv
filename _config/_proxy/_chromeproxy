@@ -1,0 +1,4 @@
+
+vim ~/.config/chrome-flags.conf
+这里可没有什么两个--
+–proxy-server=locahost:1333

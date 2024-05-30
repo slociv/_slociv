@@ -182,3 +182,44 @@ egrep: warning: egrep is obsolescent; using grep -E
 参考文献
 https://askubuntu.com/questions/1392979/no-southbridge-ioapic-found
 https://superuser.com/questions/1052023/ioapic0-not-in-ivrs-table
+
+
+.bashrc 等等这一切的东西都需要设置与备份在这里，也不需要配置了
+比如这些设置fish
+export LANG=zh_CN.UTF-8
+export LANGUAGE=zh_CN:en_US
+
+
+#启动fish
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
+    exec fish
+fi
+直接用chezmoi
+
+一系列的教程都在https://www.chezmoi.io/quick-start/
+以及我的git 文件夹中
+简单命令
+chezmoi init
+
+chezmoi add ~/.bashrc
+
+改，并没有改变真的bashrc只是~/.local/share/chezmoi/dot_bashrc
+chezmoi edit ~/.bashrc
+
+常见问题
+https://www.chezmoi.io/user-guide/frequently-asked-questions/usage/#if-theres-a-mechanism-in-place-for-the-above-is-there-also-a-way-to-tell-chezmoi-to-ignore-specific-files-or-groups-of-files-eg-by-directory-name-or-by-glob
+
+
+chezmoi -v apply
+
+$ chezmoi cd
+$ git add .
+$ git commit -m "Initial commit"
+
+
+$ git remote add origin git@github.com:$GITHUB_USERNAME/dotfiles.git
+$ git branch -M main
+$ git push -u origin main
+
+详细操作用这个
+https://linux.cn/article-12109-1.html

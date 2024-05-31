@@ -221,5 +221,7 @@ $ git remote add origin git@github.com:$GITHUB_USERNAME/dotfiles.git
 $ git branch -M main
 $ git push -u origin main
 
-详细操作用这个
+详细操作用这个https://www.chezmoi.io/quick-start/#start-using-chezmoi-on-your-current-machine
+
+https://zhaohongxuan.github.io/2022/08/05/use-chezmoi-manage-dotfiles/
 https://linux.cn/article-12109-1.html

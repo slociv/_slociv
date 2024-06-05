@@ -1,19 +1,11 @@
-#include<iostream>
-#include<string>
-
-//深拷贝
-int main() {
-	int a = 1;
-	int b = a;
-	a = 2;
-
-	std::cout << a << b << std::endl;
-}
-
-
-
-
+#include <iostream>
+#include <string>
 //C++的浅拷贝(shallow copy)
+
+//C++中拷贝分为深拷贝和浅拷贝，
+//深拷贝复制内容，浅拷贝复制指针。
+//讲解了拷贝在string类中的应用，
+//并演示了深拷贝和浅拷贝的区别。
 class String {
 private:
 	char* m_str;
@@ -24,6 +16,22 @@ public:
 		m_str = new char[m_size + 1];
 		memcpy(m_str, str, m_size + 1);
 	};
+
+	~String() {
+		delete[] m_str;
+	}
+	
+//	String(const String& other) :m_str(other.m_str), m_size(other.m_size) {
+
+//	};
+	String(const String& other) : m_size(other.m_size) {
+		m_str = new char[m_size + 1];
+		memcpy(m_str, other.m_str, m_size + 1);
+	}
+	char& operator[](unsigned int index) {
+		return m_str[index];
+	}
+	//友元 ,通过重载输出运算符和使用friend关键字，实现了对私有成员变量的访问和输出。
 	friend std::ostream& operator<<(std::ostream& stream, const String& str);
 
 };

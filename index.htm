@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World</title>
+    <link rel="stylesheet" type="text/css" href="./easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./easyui/themes/icon.css">
+    <script type="text/javascript" src="./easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="./easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
     <h1>Hello, World!</h1>
     <p>This is a simple Hello World page.</p>
     <p>这是一个测试信息。</p>
+    <div class="easyui-panel" style="padding:5px">
+        <ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true,lines:true"></ul>
+    </div>
 </body>
 </html>

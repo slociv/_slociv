@@ -2,36 +2,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Notes</title>
+    <title>树线 - jQuery EasyUI组件功能在线演示</title>
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.6.min.js"></script>
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
-    <h2>My Notes</h2>
-    <div class="easyui-panel" title="My Notes" style="width:400px;">
-        <ul id="tt" class="easyui-tree" data-options="url:'tree_data.json',method:'get',animate:true,lines:true"></ul>
-    </div>
-    <div id="content" style="margin-top:20px;">
-        <h3>Note Content</h3>
-        <pre id="noteContent"></pre>
+    <h2>树线</h2>
+    <p>这个示例展示了如何显示树线。</p>
+    <div style="margin:10px 0;"></div>
+    <div class="easyui-panel" style="padding:5px">
+        <ul id="tt" class="easyui-tree"></ul>
     </div>
 
     <script type="text/javascript">
         $(function(){
             $('#tt').tree({
-                onClick: function(node){
-                    if (node.attributes && node.attributes.url){
-                        $.ajax({
-                            url: node.attributes.url,
-                            success: function(data){
-                                $('#noteContent').text(data);
-                            },
-                            error: function(){
-                                $('#noteContent').text('Failed to load content');
-                            }
-                        });
+                url: 'tree_data.json',
+                animate: true,
+                lines: true,
+                onLoadSuccess: function(node, data) {
+                    // Optional: Expand the first level of nodes
+                    var rootNode = $(this).tree('getRoot');
+                    $(this).tree('expand', rootNode.target);
+                },
+                onClick: function(node) {
+                    if (node.attributes && node.attributes.url) {
+                        // Example: Open URL in a new tab/window
+                        window.open(node.attributes.url, '_blank');
                     }
                 }
             });

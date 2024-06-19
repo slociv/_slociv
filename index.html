@@ -13,28 +13,8 @@
     <p>这个示例展示了如何显示树线。</p>
     <div style="margin:10px 0;"></div>
     <div class="easyui-panel" style="padding:5px">
-        <ul id="tt" class="easyui-tree"></ul>
+        <ul id="tt" class="easyui-tree" data-options="url:'/_SLOCIV/tree_data.json',method:'get',animate:true,lines:true"></ul>
     </div>
 
-    <script type="text/javascript">
-        $(function(){
-            $('#tt').tree({
-                url: 'tree_data.json',
-                animate: true,
-                lines: true,
-                onLoadSuccess: function(node, data) {
-                    // Optional: Expand the first level of nodes
-                    var rootNode = $(this).tree('getRoot');
-                    $(this).tree('expand', rootNode.target);
-                },
-                onClick: function(node) {
-                    if (node.attributes && node.attributes.url) {
-                        // Example: Open URL in a new tab/window
-                        window.open(node.attributes.url, '_blank');
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>

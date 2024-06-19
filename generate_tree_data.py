@@ -3,9 +3,17 @@ import json
 
 def generate_tree_data(root_dir):
     tree_data = []
-
+    def natural_sort_key(s):
+        import re
+        return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s['id'])]
     def add_nodes(path, parent_node):
-        for item in os.listdir(path):
+        items = os.listdir(path)
+        # 根据id（basename）进行排序
+        #items.sort(key=lambda x: os.path.basename(x))
+        # 按照自然排序（数值顺序）对items进行排序
+        items.sort(key=lambda x: natural_sort_key({'id': os.path.basename(x)}))
+        
+        for item in items:
             item_path = os.path.join(path, item)
             if os.path.isdir(item_path):
                 node = {

@@ -1,28 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Directory Tree</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-easyui@1.9.15/themes/default/easyui.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-easyui@1.9.15/jquery.easyui.min.js"></script>
+    <title>My Notes</title>
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
-    <h2>Directory Tree</h2>
-    <ul id="tt" class="easyui-tree"></ul>
+    <h2>My Notes</h2>
+    <div class="easyui-panel" title="My Notes" style="width:400px;">
+        <ul id="tt" class="easyui-tree" data-options="url:'tree_data.json',method:'get',animate:true,lines:true"></ul>
+    </div>
+    <div id="content" style="margin-top:20px;">
+        <h3>Note Content</h3>
+        <pre id="noteContent"></pre>
+    </div>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $.getJSON("tree_data.json", function(data) {
-                $('#tt').tree({
-                    data: data,
-                    animate: true,
-                    onClick: function(node) {
-                        if (node.attributes && node.attributes.url) {
-                            window.open(node.attributes.url, '_blank');
-                        }
+        $(function(){
+            $('#tt').tree({
+                onClick: function(node){
+                    if (node.attributes && node.attributes.url){
+                        $.ajax({
+                            url: node.attributes.url,
+                            success: function(data){
+                                $('#noteContent').text(data);
+                            },
+                            error: function(){
+                                $('#noteContent').text('Failed to load content');
+                            }
+                        });
                     }
-                });
+                }
             });
         });
     </script>

@@ -2,21 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-    <link rel="stylesheet" type="text/css" href="http://jeasyui.com/easyui/themes/material-teal/easyui.css">
-    <link rel="stylesheet" type="text/css" href="http://jeasyui.com/easyui/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="http://jeasyui.com/css/demo1.css">
-    
-    <script type="text/javascript" src="http://jeasyui.com/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="http://jeasyui.com/easyui/jquery.easyui.min.js"></script>
+    <title>Directory Tree</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-easyui@1.9.15/themes/default/easyui.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-easyui@1.9.15/jquery.easyui.min.js"></script>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a simple Hello World page.</p>
-    <p>这是一个测试信息。</p>
-    <div class="easyui-panel" style="padding:5px">
-        <ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true,lines:true"></ul>
-    </div>
+    <h2>Directory Tree</h2>
+    <ul id="tt" class="easyui-tree"></ul>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.getJSON("tree_data.json", function(data) {
+                $('#tt').tree({
+                    data: data,
+                    animate: true,
+                    onClick: function(node) {
+                        if (node.attributes && node.attributes.url) {
+                            window.open(node.attributes.url, '_blank');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

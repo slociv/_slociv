@@ -1,0 +1,2 @@
+IDEA生成序列号serialVersionUID快捷键
+1、setting->Inspections->Serialization issues，将serialzable class without "serialVersionUID"打上勾；

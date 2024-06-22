@@ -1,0 +1,31 @@
+用户名/密码->登陆->创建sessionid&会话结束时间->sessionid设置到cookie，结束时间设置为cookies的有效期
+->有效期结束后浏览器会自己删除cookie
+
+总结-session具有时效性问题
+
+有时候登陆的用户名和密码信息服务器可以给它加密设置成cookie,高大上的名字叫签名
+通过js 逆向可以解密这个算法，服务器可以生成一个随机key和这个签名关联，将key返回给
+浏览器写入cookie，这个过程就是session ，这个key就是sessionid，是浏览器的唯一身份区分
+
+但是除了网页还有aap和小程序没有cookie机制
+
+将sessionid换个名字叫token，少了这个cookie
+
+在单机没问题，在分布式出现某些服务器没有会话数据导致鉴权失败，
+为了解决这个问题需要假设一个中心化的存储服务比如redis来存储绘画数据
+但是中心化服务器redis会给系统造成性能瓶颈，
+这个redis中心服务器如果挂了就完了，所以我们还是交给客户端保管，
+
+交给客户端保管后，原本在服务器里面的session,就是经过加密签名的服务器和密码数据就放到了客户端，
+这样是十分危险的，有各种五花八门的加密用数据的算法，其中有一个叫jwt
+由三部分组成，
+哈希算法 &token类型
+header：alg：hs256 typ：jwt 
+数据
+payload：id：100 name：老王 iat：3933993
+签名
+HMASHA256（BASE64URLENCODE（header）+“.”+HMASHA256（BASE64URLENCODE（payload）+yout-256-bit-secret）
+
+
+签名再好也是可以解开的和明文没由多大的区别
+敏感信息不要写在jwt的载体里面

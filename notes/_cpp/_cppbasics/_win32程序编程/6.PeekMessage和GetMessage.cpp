@@ -89,10 +89,30 @@ int WINAPI WinMain(HINSTANCE hins, HINSTANCE hPre, LPSTR lpCmd, int nCmd) {
 	UpdateWindow(hWnd);
 	//6.消息处理-消息循环-消息翻译-消息派发
 	MSG nMsg = { 0 };
-	while (GetMessage(&nMsg, NULL, 0, 0)) {
-		//消息翻译
-		TranslateMessage(&nMsg);
-		DispatchMessage(&nMsg);
+	const char* buffer = "有消息";
+	//while (GetMessage(&nMsg, NULL, 0, 0)) {
+	//	//消息翻译
+	//	TranslateMessage(&nMsg);
+	//	DispatchMessage(&nMsg);
+	//	WriteConsole(g_output, buffer, strlen(buffer), NULL, NULL);
+	//}
+
+	while (true) {
+		if (PeekMessage(&nMsg, NULL, 0, 0, PM_NOREMOVE)) {
+			if (GetMessage(&nMsg, NULL, 0, 0)) {
+				TranslateMessage(&nMsg);
+				DispatchMessage(&nMsg);
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else
+		{
+			//没有消息
+			WriteConsole(g_output, buffer, strlen(buffer), NULL, NULL);
+		}
 	}
 	return 0;
 

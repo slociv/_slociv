@@ -1,7 +1,7 @@
+cookie和session和token jwt 等概念和联系
+
 用户名/密码->登陆->创建sessionid&会话结束时间->sessionid设置到cookie，结束时间设置为cookies的有效期
 ->有效期结束后浏览器会自己删除cookie
-
-总结-session具有时效性问题
 
 有时候登陆的用户名和密码信息服务器可以给它加密设置成cookie,高大上的名字叫签名
 通过js 逆向可以解密这个算法，服务器可以生成一个随机key和这个签名关联，将key返回给
@@ -29,3 +29,66 @@ HMASHA256（BASE64URLENCODE（header）+“.”+HMASHA256（BASE64URLENCODE（pa
 
 签名再好也是可以解开的和明文没由多大的区别
 敏感信息不要写在jwt的载体里面
+
+总结
+session 是一个会话过程，这个过程所产生的数据是存在服务端的
+token 是由于要节省服务器资源将这个存储在服务器的数据存在了用户的cookie里
+一是降低了服务器内存和硬盘的开销，节约了金钱的成本 
+二是那就不要怪用户想怎么就改就怎么改了，token 会话产生的数据在客户端由上面3部分组成
+token 是加密的可以解密成明文
+
+jwt 就是token 存在与客户端的一种签名实现的方法
+//参考文献：www.bilibili.com/video/BV18u4m1K7D4
+
+
+
+通过redis 解决session和cookie 失效问题
+
+cookie 失效，我们将sessionid 存为redis的key,将验证码作为value,
+然后将sessionid 响应给前端
+
+session失效，redis 过期机制让这个session失效
+
+但他和cookie 没有任何的区别，还占用服务器的内存，肯定不能这么用
+并且redis还有瓶颈肯定不能这么用
+这个项目这么用了可见他有多么的垃圾为了用redis而用redis,但是我们还是要学习的
+
+
+生成sessionid的方法
+生成一个long类型的64位id 作为我们的sessionid 作为我的rediskey 传到客户端
+
+
+
+redisTemplate.opsForValue().set(StockConstant.CHECK_PREFIX + sessionId, checkCode, 1, TimeUnit.MINUTES);
+这行代码使用了redisTemplate对象来设置一个键值对到Redis中。
+具体来说，它将一个键（由StockConstant.CHECK_PREFIX和sessionId组成）和一个值（checkCode）存储到Redis中，
+并设置这个键值对在1分钟后过期。
+
+redis 配置
+application.yml
+
+spring.profiles.active=cache
+
+
+常量类
+/**
+ * @author by slociv
+ * @Description 常量类信息封装
+ */
+public class StockConstant {
+
+    /**
+     * 定义校验码的前缀
+     */
+    public static final String CHECK_PREFIX="CK:";
+
+    /**
+     * http请求头携带Token信息key
+     */
+    public static final String TOKEN_HEADER = "authorization";
+
+    /**
+     * 缓存股票相关信息的cacheNames命名前缀
+     */
+    public static final String STOCK="stock";
+}

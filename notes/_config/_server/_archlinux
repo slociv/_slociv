@@ -2,7 +2,8 @@
 #可以安装的软件gedit gvim nutstore nautilus fish chezmoi freerdp neofetch gedit noto-fonts noto-fonts-cjk noto-fonts-emoji firefox-esr/firefox早晚卸载暂时使用
 gnome-control-center gnome-shell gnome-shell-extensions gnome-tweaks gnome-browser-connector github-desktop-bin freerdp2 
 vscodium-bin flamshot telegram-desktop smplayer ungoogled-chromium vnote
-
+投屏    adb工具
+scrcpy android-tools
 可选软件 doxygen
 
 yay 软件 jdk21-temurin baidunetdisk-bin tencent-docs-bin pepper-flash nutstore-experimental mybase-desktop-bin google-chrome

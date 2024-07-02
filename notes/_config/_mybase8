@@ -1,0 +1,36 @@
+mybase 配置快捷方式
+这个问题可能是因为 `Mybase.run` 文件中包含了一个类似于 `exec "$0"` 的命令，它会导致自身再次运行，从而造成循环。这种情况通常发生在一些脚本或程序中，尝试使用自身的路径来再次启动。
+
+为了避免这种情况，我们可以使用另一种方法来创建符号链接。具体步骤如下：
+
+1. **删除之前创建的符号链接**（如果还存在）：
+   ```sh
+   sudo rm /usr/bin/mybase
+   ```
+
+2. **创建一个简单的包装脚本**：
+   在 `/usr/local/bin` 目录中创建一个名为 `mybase` 的脚本文件：
+   ```sh
+   sudo nano /usr/local/bin/mybase
+   ```
+
+3. **在脚本中添加以下内容**：
+   ```sh
+   #!/bin/bash
+   /opt/Mybase8/Mybase.run "$@"
+   ```
+
+4. **保存并关闭文件**（在 nano 中，按 `Ctrl+X` 然后按 `Y` 保存并退出）。
+
+5. **使脚本可执行**：
+   ```sh
+   sudo chmod +x /usr/local/bin/mybase
+   ```
+
+6. **测试运行 `mybase`**：
+   通过运行以下命令测试 `mybase`：
+   ```sh
+   mybase
+   ```
+
+这种方法将直接调用 `/opt/Mybase8/Mybase.run`，并将任何参数传递给它，同时避免了可能导致循环的问题。

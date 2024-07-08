@@ -1,0 +1,8 @@
+set -x http_proxy http://127.0.0.1:2080
+set -x https_proxy http://127.0.0.1:2080
+set -x ftp_proxy http://127.0.0.1:2080
+set -x all_proxy socks5://127.0.0.1:2080
+set -x no_proxy localhost,127.0.0.1,::1
+
+
+写在最上面

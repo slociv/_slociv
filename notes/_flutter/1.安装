@@ -1,0 +1,37 @@
+
+sudo pacman -Sy dart
+
+
+其中包括adbaka Android Debug Bridge 等
+sudo pacman -Sy android-tools
+
+yay -S flutter
+
+开发安卓工具包
+yay -S android-sdk
+
+安装 Android 工具
+要在 Android 设备或模拟器上运行 Flutter 应用程序，需要安装 Android 工具。可以使用以下命令安装 Android 工具：
+
+yay -S android-tools
+yay -S android-sdk-platform-tools
+yay -S android-sdk-cmdline-tools-latest
+yay -S android-sdk-build-tools
+yay -S android-platform
+
+配置Android SDK 的路径
+flutter config --android-sdk /opt/android-sdk
+
+更改文件夹权限 <username> 替换为你的用户名
+sudo chown -R <username>:<username> /opt/flutter
+sudo chown -R <username>:<username> /opt/android-sdk
+sudo chown -R <username>:<username> /opt/dart-sdk
+
+
+flutter doctor --android-licenses
+
+配置google chrome 
+
+yay -S google-chrome
+sudo ln -s /usr/bin/google-chrome-stable /usr/bin/google-chrome
+

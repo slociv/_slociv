@@ -5,12 +5,19 @@
         "state": "closed",
         "children": [
             {
-                "id": "_idea",
-                "text": "_idea",
-                "state": "open",
-                "attributes": {
-                    "url": "notes/_config/_idea"
-                }
+                "id": "_docker",
+                "text": "_docker",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "1.docker原理.md",
+                        "text": "1.docker原理.md",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_docker/1.docker原理.md"
+                        }
+                    }
+                ]
             },
             {
                 "id": "_maven",
@@ -36,6 +43,14 @@
                 ]
             },
             {
+                "id": "_mybase8",
+                "text": "_mybase8",
+                "state": "open",
+                "attributes": {
+                    "url": "notes/_config/_mybase8"
+                }
+            },
+            {
                 "id": "_proxy",
                 "text": "_proxy",
                 "state": "closed",
@@ -49,11 +64,35 @@
                         }
                     },
                     {
+                        "id": "_nekoray",
+                        "text": "_nekoray",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_proxy/_nekoray"
+                        }
+                    },
+                    {
+                        "id": "_proxy",
+                        "text": "_proxy",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_proxy/_proxy"
+                        }
+                    },
+                    {
                         "id": "_systemproxy",
                         "text": "_systemproxy",
                         "state": "open",
                         "attributes": {
                             "url": "notes/_config/_proxy/_systemproxy"
+                        }
+                    },
+                    {
+                        "id": "fish",
+                        "text": "fish",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_proxy/fish"
                         }
                     }
                 ]
@@ -90,12 +129,58 @@
                 ]
             },
             {
+                "id": "_sites",
+                "text": "_sites",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "素质教育",
+                        "text": "素质教育",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_sites/素质教育"
+                        }
+                    },
+                    {
+                        "id": "编程-逆向",
+                        "text": "编程-逆向",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_sites/编程-逆向"
+                        }
+                    }
+                ]
+            },
+            {
                 "id": "_softwareRecommend",
                 "text": "_softwareRecommend",
                 "state": "open",
                 "attributes": {
                     "url": "notes/_config/_softwareRecommend"
                 }
+            },
+            {
+                "id": "idea",
+                "text": "idea",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "_idea代理",
+                        "text": "_idea代理",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/idea/_idea代理"
+                        }
+                    },
+                    {
+                        "id": "idea配置",
+                        "text": "idea配置",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/idea/idea配置"
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -104,6 +189,21 @@
         "text": "_cpp",
         "state": "closed",
         "children": [
+            {
+                "id": "_config",
+                "text": "_config",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "在vs中添加外部lib库的三种方法",
+                        "text": "在vs中添加外部lib库的三种方法",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_cpp/_config/在vs中添加外部lib库的三种方法"
+                        }
+                    }
+                ]
+            },
             {
                 "id": "_cppbasics",
                 "text": "_cppbasics",
@@ -425,10 +525,71 @@
                                 "attributes": {
                                     "url": "notes/_cpp/_cppbasics/_win32程序编程/5.常见消息及调试.cpp"
                                 }
+                            },
+                            {
+                                "id": "6.PeekMessage和GetMessage.cpp",
+                                "text": "6.PeekMessage和GetMessage.cpp",
+                                "state": "open",
+                                "attributes": {
+                                    "url": "notes/_cpp/_cppbasics/_win32程序编程/6.PeekMessage和GetMessage.cpp"
+                                }
+                            },
+                            {
+                                "id": "7.发送消息和消息自定义.cpp",
+                                "text": "7.发送消息和消息自定义.cpp",
+                                "state": "open",
+                                "attributes": {
+                                    "url": "notes/_cpp/_cppbasics/_win32程序编程/7.发送消息和消息自定义.cpp"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "_辅助制作",
+                        "text": "_辅助制作",
+                        "state": "closed",
+                        "children": [
+                            {
+                                "id": "1.MFC dll注入.cpp",
+                                "text": "1.MFC dll注入.cpp",
+                                "state": "open",
+                                "attributes": {
+                                    "url": "notes/_cpp/_cppbasics/_辅助制作/1.MFC dll注入.cpp"
+                                }
                             }
                         ]
                     }
                 ]
+            }
+        ]
+    },
+    {
+        "id": "_electron",
+        "text": "_electron",
+        "state": "closed",
+        "children": [
+            {
+                "id": "1.electron与node,npm 对应关系.md",
+                "text": "1.electron与node,npm 对应关系.md",
+                "state": "open",
+                "attributes": {
+                    "url": "notes/_electron/1.electron与node,npm 对应关系.md"
+                }
+            }
+        ]
+    },
+    {
+        "id": "_flutter",
+        "text": "_flutter",
+        "state": "closed",
+        "children": [
+            {
+                "id": "1.安装",
+                "text": "1.安装",
+                "state": "open",
+                "attributes": {
+                    "url": "notes/_flutter/1.安装"
+                }
             }
         ]
     },
@@ -461,12 +622,85 @@
         "state": "closed",
         "children": [
             {
-                "id": "1.创建并命名变量",
-                "text": "1.创建并命名变量",
+                "id": "1.创建并命名变量.md",
+                "text": "1.创建并命名变量.md",
                 "state": "open",
                 "attributes": {
-                    "url": "notes/_java/1.创建并命名变量"
+                    "url": "notes/_java/1.创建并命名变量.md"
                 }
+            },
+            {
+                "id": "images",
+                "text": "images",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "2024",
+                        "text": "2024",
+                        "state": "closed",
+                        "children": [
+                            {
+                                "id": "1.创建并命名变量",
+                                "text": "1.创建并命名变量",
+                                "state": "closed",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "project",
+                "text": "project",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "todaystack",
+                        "text": "todaystack",
+                        "state": "closed",
+                        "children": [
+                            {
+                                "id": "2.大盘功能实现",
+                                "text": "2.大盘功能实现",
+                                "state": "closed",
+                                "children": [
+                                    {
+                                        "id": "1.前后端分离导致的问题",
+                                        "text": "1.前后端分离导致的问题",
+                                        "state": "open",
+                                        "attributes": {
+                                            "url": "notes/_java/project/todaystack/2.大盘功能实现/1.前后端分离导致的问题"
+                                        }
+                                    },
+                                    {
+                                        "id": "1.前后端分离导致的问题.md",
+                                        "text": "1.前后端分离导致的问题.md",
+                                        "state": "open",
+                                        "attributes": {
+                                            "url": "notes/_java/project/todaystack/2.大盘功能实现/1.前后端分离导致的问题.md"
+                                        }
+                                    },
+                                    {
+                                        "id": "index",
+                                        "text": "index",
+                                        "state": "open",
+                                        "attributes": {
+                                            "url": "notes/_java/project/todaystack/2.大盘功能实现/index"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "18-用户登陆功能.java",
+                                "text": "18-用户登陆功能.java",
+                                "state": "open",
+                                "attributes": {
+                                    "url": "notes/_java/project/todaystack/18-用户登陆功能.java"
+                                }
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -511,6 +745,14 @@
                 "state": "open",
                 "attributes": {
                     "url": "notes/git/git备忘.md"
+                }
+            },
+            {
+                "id": "git文档书写格式和方法.md",
+                "text": "git文档书写格式和方法.md",
+                "state": "open",
+                "attributes": {
+                    "url": "notes/git/git文档书写格式和方法.md"
                 }
             }
         ]

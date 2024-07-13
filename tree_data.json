@@ -20,6 +20,29 @@
                 ]
             },
             {
+                "id": "_kvm",
+                "text": "_kvm",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "安装qemu",
+                        "text": "安装qemu",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_kvm/安装qemu"
+                        }
+                    },
+                    {
+                        "id": "安装windows",
+                        "text": "安装windows",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_kvm/安装windows"
+                        }
+                    }
+                ]
+            },
+            {
                 "id": "_maven",
                 "text": "_maven",
                 "state": "closed",
@@ -94,6 +117,14 @@
                         "attributes": {
                             "url": "notes/_config/_proxy/fish"
                         }
+                    },
+                    {
+                        "id": "git",
+                        "text": "git",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_proxy/git"
+                        }
                     }
                 ]
             },
@@ -116,6 +147,14 @@
                         "state": "open",
                         "attributes": {
                             "url": "notes/_config/_server/_archlinux"
+                        }
+                    },
+                    {
+                        "id": "_dae",
+                        "text": "_dae",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_server/_dae"
                         }
                     },
                     {
@@ -158,6 +197,21 @@
                 "attributes": {
                     "url": "notes/_config/_softwareRecommend"
                 }
+            },
+            {
+                "id": "_刷机",
+                "text": "_刷机",
+                "state": "closed",
+                "children": [
+                    {
+                        "id": "通用安卓刷机教程",
+                        "text": "通用安卓刷机教程",
+                        "state": "open",
+                        "attributes": {
+                            "url": "notes/_config/_刷机/通用安卓刷机教程"
+                        }
+                    }
+                ]
             },
             {
                 "id": "idea",

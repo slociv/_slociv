@@ -1,0 +1,54 @@
+. 確認電腦虛擬化與KVM支援狀況
+#
+在BIOS中啟用CPU的虛擬化支援。
+
+輸入以下指令查看CPU是否已開啟虛擬化，Intel應該會輸出Vt-x (vmx)，AMD則是AMD-V (svm)。
+
+sudo grep --color -E "vmx|svm" /proc/cpuinfo
+檢查KVM核心模組是否有載入
+sudo lsmod | grep kvm
+2. 安裝QMEU和Virt Manager
+#
+安裝QEMU、Libvirt、libguestfs、IPtables、virglrenderer，全部Enter使用預設值：
+sudo pacman -S archlinux-keyring qemu-full virt-manager virt-viewer edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat libguestfs ebtables iptables virglrenderer
+安裝好之後，設定開機啟動Libvirtd的系統服務，以及開機自動啟用NAT網路卡：
+sudo systemctl enable --now libvirtd
+sudo virsh net-start default
+sudo virsh net-autostart default
+如果你的電腦不支援TPM 2.0，但需要軟體模擬，請安裝Software TPM emulator ：
+sudo pacman -S swtpm
+3. 調整KVM的權限
+#
+將自己加入libvirt和KVM群組，這樣不用root也能啟動QEMU/KVM虛擬機。
+sudo usermod -a -G libvirt $USER
+sudo usermod -a -G libvirt root
+sudo usermod -a -G kvm $USER
+sudo usermod -a -G kvm root
+編輯/etc/polkit-1/rules.d/50-libvirt.rules，讓KVM群組的用戶也可以管理Libvirt服務：
+/* Allow users in kvm group to manage the libvirt
+daemon without authentication */
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.libvirt.unix.manage" &&
+        subject.isInGroup("kvm")) {
+            return polkit.Result.YES;
+    }
+});
+重新啟動服務
+sudo systemctl restart libvirtd
+這樣就可以開始安裝Ubuntu或 Windows虛擬機了。
+4. Virt Manager實用技巧
+#
+Virt Manager預設建立的網路是NAT，有需要的話得手動用指令調整為橋接模式(bridged)。
+
+Spice Guest Tools能讓虛擬機與實體機共用剪貼簿，虛擬機也會自動隨著虛擬機視窗大小縮放解析度。
+
+如果想要與虛擬機共享資料夾，可考慮用 virtio-fs掛載本機Linux的目錄。
+
+部份系統的虛擬機可以透過 virglrenderer達成3D硬體加速。
+
+你可以透過「GPU Passthrough」，將Linux的顯示卡直通給虛擬機，使其能執行3D應用程式、跑AI計算、玩遊戲。具體作法參見 在Windows虛擬機玩遊戲
+
+參考資料
+#
+QEMU - ArchWiki
+Libvirt - ArchWiki

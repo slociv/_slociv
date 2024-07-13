@@ -1,0 +1,13 @@
+iso 地址
+https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbWVoMEZuVnBEbEhhUm14N0ZCY3BWekRDaXd1Z3xBQ3Jtc0trMjBxeUVUMXF1SW9QLWhOWkhzNDVQWk9jR0VqbHh1MVgtZUY3RUtENVFuOFZxcUdkT2tNZkdoRzJQNDNyUjl6cmpic2JoaDdWUXlXMS1WbEpUdWhCczVHbU9kREVxVUhNaUJocjYxTG16WTNCNmotTQ&q=https%3A%2F%2Fwww.microsoft.com%2Fsoftware-download%2Fwindows11&v=06uhcis9M5U
+
+virtio地址
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/
+
+
+
+https://www.youtube.com/watch?v=06uhcis9M5U
+
+25：53 安装好后设置远程连接
+
+xfreerdp /u:administrator /w:960 /h:1080 /v:192.168.122.18 /sound:sys:pulse /video /rfx /network:lan /gfx /bpp:32 /dynamic-resolution

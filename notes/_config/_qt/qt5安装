@@ -1,0 +1,10 @@
+https://mirrors.tuna.tsinghua.edu.cn/qt/official_releases/online_installers/
+
+
+点击qt-unified-windows-x64-online.exe进行下载。
+
+用命令行打开
+
+.\qt-unified-windows-x64-online.exe --mirror https://mirrors.ustc.edu.cn/qtproject
+
+接下来看这个教程https://blog.csdn.net/Scarlett2025/article/details/131786402

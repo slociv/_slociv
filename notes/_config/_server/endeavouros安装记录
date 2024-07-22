@@ -1,0 +1,26 @@
+1.修改安装配置
+肯定是要在线安装的
+sudo nano /etc/calamares/modules/welcome_online.conf
+我感觉横杠应该是注释 在url上加上www.apple.com
+去掉- internet前面的-
+2.链接网络，肯定不可能安装kde的毕竟纯c的gtk更香，
+3.禁用自动更新软件源服务
+systemctl stop reflector.service
+
+
+timedatectl set-ntp true # 将系统时间与网络时间进行同步
+vim可能没有但是nano一般都有
+
+nano /etc/pacman.d/mirrorlist
+我肯定不用第二个
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch # 中国科学技术大学开源镜像站
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch # 清华大学开源软件镜像站
+
+ctrl  k 剪切删光
+
+
+将安装界面更改为中文
+
+4直接打开安装程序点击online
+
+有魔法应该要等很长时间，说实话挺差劲的

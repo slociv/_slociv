@@ -19,8 +19,8 @@ listen: :55580 #监听端口
 #使用CA证书
 acme:
   domains:
-    - a.jcl.dns-dynamic.net #你的域名，需要先解析到服务器ip
-  email: skdhfm932@gmail.com
+    - x.x.net #你的域名，需要先解析到服务器ip
+  email: skdhf6m932@gmail.com
 
 #使用自签证书
 #tls:
@@ -29,7 +29,7 @@ acme:
 
 auth:
   type: password
-  password: Lqz199911 #设置认证密码
+  password: 123456 #设置认证密码
   
 masquerade:
   type: proxy
@@ -69,15 +69,15 @@ systemctl status hysteria-server.service
 
 客户端配置
 
-server: a.jcl.dns-dynamic.net:55580
-auth: Lqz199911
+server: x.x..net:55580
+auth: 123456
 
 bandwidth:
   up: 100 mbps
   down: 520 mbps
   
 tls:
-  sni: a.jcl.dns-dynamic.net
+  sni: x.x.x.net
   insecure: false #使用自签时需要改成true
 
 socks5:

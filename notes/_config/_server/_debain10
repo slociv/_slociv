@@ -1,0 +1,86 @@
+-racknerd
+
+apt update -y
+
+apt install sudo curl
+
+systemctl stop hysteria-server.service
+
+openssl req -x509 -nodes -newkey ec:<(openssl ecparam -name prime256v1) -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj "/CN=bing.com" -days 36500 && sudo chown hysteria /etc/hysteria/server.key && sudo chown hysteria /etc/hysteria/server.crt
+
+openssl req -x509 -nodes -newkey ec:<(openssl ecparam -name prime256v1) -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj "/CN=bt.455777.xyz" -days 36500 && sudo chown hysteria /etc/hysteria/server.key && sudo chown hysteria /etc/hysteria/server.crt
+
+openssl req -x509 -nodes -newkey ec:<(openssl ecparam -name prime256v1) -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj "/CN=images.apple.com" -days 36500 && sudo chown hysteria /etc/hysteria/server.key && sudo chown hysteria /etc/hysteria/server.crt
+
+
+cat << EOF > /etc/hysteria/config.yaml
+listen: :55580 #监听端口
+
+#使用CA证书
+acme:
+  domains:
+    - a.jcl.dns-dynamic.net #你的域名，需要先解析到服务器ip
+  email: skdhfm932@gmail.com
+
+#使用自签证书
+#tls:
+#  cert: /etc/hysteria/server.crt
+#  key: /etc/hysteria/server.key
+
+auth:
+  type: password
+  password: Lqz199911 #设置认证密码
+  
+masquerade:
+  type: proxy
+  proxy:
+    url: https://images.apple.com #伪装网址
+    rewriteHost: true
+EOF
+
+
+systemctl status hysteria-server.service
+
+systemctl restart hysteria-server.service
+
+systemctl status hysteria-server.service
+
+sudo apt install ufw
+
+sudo ufw enable
+
+sudo ufw allow 55580/udp  
+sudo ufw allow 55580/tcp
+sudo ufw allow 22/tcp
+sudo ufw allow 22/udp  
+sudo ufw allow 80/tcp
+sudo ufw allow 80/udp  
+sudo ufw allow 443/tcp
+sudo ufw allow 443/udp  
+
+sudo ufw status
+
+
+systemctl restart hysteria-server.service
+
+systemctl status hysteria-server.service
+
+最后一条日志出现hysteria[12031]: 2024-07-21T12:38:17-04:00        INFO        server up and running 
+
+客户端配置
+
+server: a.jcl.dns-dynamic.net:55580
+auth: Lqz199911
+
+bandwidth:
+  up: 100 mbps
+  down: 520 mbps
+  
+tls:
+  sni: a.jcl.dns-dynamic.net
+  insecure: false #使用自签时需要改成true
+
+socks5:
+  listen: 127.0.0.1:1080
+http:
+  listen: 127.0.0.1:8080

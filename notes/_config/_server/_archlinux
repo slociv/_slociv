@@ -190,17 +190,21 @@ egrep: warning: egrep is obsolescent; using grep -E
 
 改成这个GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2"
 
+
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 参考文献
 https://askubuntu.com/questions/1392979/no-southbridge-ioapic-found
 https://superuser.com/questions/1052023/ioapic0-not-in-ivrs-table
 
-
+性能调优
+https://wiki.archlinux.org/title/Improving_performance
 .bashrc 等等这一切的东西都需要设置与备份在这里，也不需要配置了
 比如这些设置fish
 export LANG=zh_CN.UTF-8
 export LANGUAGE=zh_CN:en_US
 
-
+vim .bashrc
 #启动fish
 if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
     exec fish

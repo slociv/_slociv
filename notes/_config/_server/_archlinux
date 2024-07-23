@@ -1,7 +1,7 @@
 systemctl stop reflector.service
 
 iwctl station wlan0 connect ...
-
+在archinstall之前都要执行下面两行
 pacman -Sy
 pacman -S archlinux-keyring
 

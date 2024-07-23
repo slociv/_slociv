@@ -212,6 +212,8 @@ https://superuser.com/questions/1052023/ioapic0-not-in-ivrs-table #这里讲到�
 
 7月 23 19:05:00 gg kernel: Bluetooth: hci0: Reading supported features failed (-16)
 通过安装 sudo pacman -S bluez bluez-utils
+systemctl enable bluetooth
+systemctl restart bluetooth.service
 
 
 

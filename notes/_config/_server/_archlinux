@@ -168,14 +168,14 @@ yay -S google-chrome
 
 设置系统为中文
 
-配置locle-gen
+配置locale-gen
 
 sudo vim /etc/locale.gen
 en_US.UTF-8 UTF-8
 zh_CN.UTF-8 UTF-8
 zh_SG.UTF-8 UTF-8
 
-
+sudo  locale-gen
 
 # 在Ubuntu / Debian上
 sudo vim /etc/default/locale

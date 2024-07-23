@@ -2,7 +2,9 @@ systemctl stop reflector.service
 
 iwctl station wlan0 connect ...
 
+pacman -Sy
 
+timedatectl set-ntp  true
 
 #系统安装没什么好说的很简单,注意不要安装音频驱动，貌似gdm会自带
 #可以安装的软件xclip gedit gvim nutstore nautilus fish chezmoi freerdp neofetch gedit noto-fonts noto-fonts-cjk noto-fonts-emoji firefox-esr/firefox早晚卸载暂时使用

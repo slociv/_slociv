@@ -21,6 +21,28 @@ sudo genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
 
+vim /etc/hostname
+gg
+vim /etc/hosts
+127.0.0.1   localhost
+::1         localhost
+127.0.1.1   gg.localdomain gg
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+hwclock --systohc
+vim /etc/locale.gen
+
+加入
+en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+
+
+locale-gen
+
+
+echo 'LANG=en_US.UTF-8'  > /etc/locale.conf
+
+passwd root
 
 #系统安装没什么好说的很简单,注意不要安装音频驱动，貌似gdm会自带
 #可以安装的软件xclip gedit gvim nutstore nautilus fish chezmoi freerdp neofetch gedit noto-fonts noto-fonts-cjk noto-fonts-emoji firefox-esr/firefox早晚卸载暂时使用

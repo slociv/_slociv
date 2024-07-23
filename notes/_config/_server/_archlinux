@@ -152,7 +152,7 @@ fcitx5
 
 sudo pacman -S fcitx5-im fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-pinyin-zhwiki
 
-sudo vim /etc/environment
+sudo gvim /etc/environment
 
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
@@ -170,7 +170,7 @@ yay -S google-chrome
 
 配置locale-gen
 
-sudo vim /etc/locale.gen
+sudo gvim /etc/locale.gen
 en_US.UTF-8 UTF-8
 zh_CN.UTF-8 UTF-8
 zh_SG.UTF-8 UTF-8
@@ -181,14 +181,14 @@ sudo  locale-gen
 sudo vim /etc/default/locale
 
 # 在CentOS / RHEL / Arch Linux 上
-sudo vim /etc/locale.conf
+sudo gvim /etc/locale.conf
 
 LANG=en_US.UTF-8
 
 
-vim .xprofile
-vim .xinitrc
-vim .bashrc
+gvim .xprofile
+gvim .xinitrc
+gvim .bashrc
 #这三个都加上
 export LANG=zh_CN.UTF-8
 export LANGUAGE=zh_CN:en_US

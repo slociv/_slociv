@@ -6,6 +6,11 @@ pacman -Sy
 
 timedatectl set-ntp  true
 
+
+lsblk
+
+gdisk /dev/sda
+
 #系统安装没什么好说的很简单,注意不要安装音频驱动，貌似gdm会自带
 #可以安装的软件xclip gedit gvim nutstore nautilus fish chezmoi freerdp neofetch gedit noto-fonts noto-fonts-cjk noto-fonts-emoji firefox-esr/firefox早晚卸载暂时使用
 gnome-system-monitor gnome-control-center gnome-shell gnome-shell-extensions gnome-tweaks gnome-browser-connector github-desktop-bin freerdp2 

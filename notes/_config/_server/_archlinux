@@ -5,6 +5,7 @@ iwctl station wlan0 connect ...
 pacman -Sy
 pacman -S archlinux-keyring
 
+vim /etc/pacmam.d/mirrorlist
 timedatectl set-ntp  true
 
 

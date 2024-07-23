@@ -1,1 +1,223 @@
+//配置越难，用起来越简单，archlinux可以最简单的安装软件，awesomewm可以治疗腱鞘炎摆脱鼠标手指不会出现疼痛。
+
+//打开wifi
+//禁止更新镜像
+systemctl stop reflector.service
+//锁定可用镜像
+sudo vim /etc/pacman.d/mirrorlist
+Server = http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+
+//连接wifi
+iwctl station wlan0 connect ...
+
+//更新安装脚本防止报错
+pacman -Sy
+pacman -S archlinux-keyring
+
+vim /etc/pacmam.d/mirrorlist
+//更改镜像原
+//再次更新
+//更新安装脚本防止报错
+pacman -Sy
+pacman -S archlinux-keyring
+
+
+archinstall
+
+//不安装音频驱动
+sudo pacman -S firefox gvim xclip
+
+//系统安装完成
+//修改grub
+
+
+//进入系统
+sudo gvim /etc/pacman.conf
+[archlinuxcn]
+#首先这个siglevel可以先设置后注释
+#SigLevel = Optional TrustedOnly
+#Server = http://repo.archlinuxcn.org/$arch
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+//***
+sudo pacman -Syu
+
+# 如果执行 sudo pacman -S archlinuxcn-keyring 有报错 error: archlinuxcn-keyring: Signature from "Jiachen YANG (Arch Linux Packager Signing Key) " is marginal trust，就执行下面的 pacman-key 来手动信任证书，然后再执行 sudo pacman -S archlinuxcn-keyring
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+sudo pacman -S archlinuxcn-keyring
+sudo pacman -S yay
+#pacman.conf 加上注释
+
+#必须安装--必备软件
+sudo pacman -S bluez bluez-utils fish freerdp neofetch noto-fonts noto-fonts-cjk noto-fonts-emoji vscodium-bin flamshot telegram-desktop smplayer flamshot telegram-desktop 
+
+// 可选sudo pacman -S gvfs-mtp nautilus
+// 可选yay -S jdk21-temurin baidunetdisk-bin tencent-docs-bin pepper-flash nutstore-experimental mybase-desktop-bin google-chrome
+
+#处理字体问题
+mkdir -p ~/.config/fontconfig
+vim ~/.config/fontconfig/fonts.conf
+
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+<!-- ${XDG_CONFIG_HOME}/fontconfig/fonts.conf
+        - vim:ft=xml:fenc=utf-8:noet:ts=3:sw=3:
+        -->
+<fontconfig>
+ <alias>
+  <family>serif</family>
+  <prefer>
+   <family>Noto Serif</family>
+   <family>Noto Color Emoji</family>
+   <family>Noto Sans CJK SC</family>
+   <family>Noto Sans CJK TC</family>
+   <family>Noto Sans CJK JP</family>
+  </prefer>
+ </alias>
+ <alias>
+  <family>sans-serif</family>
+  <prefer>
+   <family>Noto Sans</family>
+   <family>Noto Color Emoji</family>
+   <family>Noto Sans CJK SC</family>
+   <family>Noto Sans CJK TC</family>
+   <family>Noto Sans CJK JP</family>
+  </prefer>
+ </alias>
+ <alias>
+  <family>monospace</family>
+  <prefer>
+   <family>Noto Sans Mono</family>
+   <family>Noto Color Emoji</family>
+   <family>Noto Sans Mono CJK SC</family>
+   <family>Noto Sans Mono CJK TC</family>
+   <family>Noto Sans Mono CJK JP</family>
+  </prefer>
+ </alias>
+ <match target="font">
+  <edit mode="assign" name="antialias">
+   <bool>true</bool>
+  </edit>
+  <edit mode="assign" name="autohint">
+   <bool>true</bool>
+  </edit>
+  <edit mode="assign" name="dpi">
+   <double>96</double>
+  </edit>
+  <edit mode="assign" name="hinting">
+   <bool>true</bool>
+  </edit>
+  <edit mode="assign" name="hintstyle">
+   <const>hintslight</const>
+  </edit>
+  <edit mode="assign" name="lcdfilter">
+   <const>lcdlight</const>
+  </edit>
+  <edit mode="assign" name="rgba">
+   <const>rgb</const>
+  </edit>
+  <edit mode="assign" name="size">
+   <int>15</int>
+  </edit>
+ </match>
+ <dir>~/.fonts</dir>
+</fontconfig>
+
+#清理字体缓存
+fc-cache -fv
+
+#配置输入法
+fcitx5
+
+sudo pacman -S fcitx5-im fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-pinyin-zhwiki
+
+sudo gvim /etc/environment
+
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
+INPUT_METHOD=fcitx
+GLFW_IM_MODULE=ibus
+
+#打开配置 将 pinyin选中
+#设置支持语言
+sudo gvim /etc/locale.gen
+en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+zh_SG.UTF-8 UTF-8
+#刷新缓存
+sudo  locale-gen
+
+#放置系统报错修改为英文
+# 在Ubuntu / Debian上
+sudo vim /etc/default/locale
+
+# 在CentOS / RHEL / Arch Linux 上
+sudo gvim /etc/locale.conf
+
+LANG=en_US.UTF-8
+
+gvim .xprofile
+gvim .xinitrc
+gvim .bashrc
+#这上面三个都加上下面两句
+export LANG=zh_CN.UTF-8
+export LANGUAGE=zh_CN:en_US
+
+#一些额外错误按需选择
+xhci_pci	upd72020x-fw
+
+wd719x	wd719x-firmware aur
+
+qla2xxx	linux-firmware-qlogic包
+
+aic94xx	aic94xx-firmware aur
+
+qla1280	linux-firmware-qlogic包
+
+qed	linux-firmware-qlogic包
+
+bfa	linux-firmware-qlogic包
+
+sudo pacman -S linux-firmware-qlogic
+
+yay -S upd72020x-fw wd719x-firmware aic94xx-firmware
+
+#然后重启，输入下面命令看启动错误
+[slociv@gg ~]$ journalctl -p 3 -b
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[4] not in IVRS table
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[5] not in IVRS table
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : No southbridge IOAPIC found
+7月 23 19:05:00 gg kernel: AMD-Vi: Disabling interrupt remapping
+7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: error -EBUSY: can't request region for resource [mem 0x8f7a2000-0x8f7a5fff]
+7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: probe with driver tpm_crb failed with error -16
+7月 23 19:05:00 gg kernel: Bluetooth: hci0: Reading supported features failed (-16)
+7月 23 19:06:30 gg systemd[1]: Timed out waiting for device /dev/tpmrm0.
+7月 23 19:06:38 gg lightdm[629]: gkr-pam: unable to locate daemon control file
+7月 23 19:09:45 gg lightdm[1745]: gkr-pam: unable to locate daemon control file
+
+将grub 改成_grub中的内容已经备份
+
+这三行可以用 ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[4] not in IVRS table
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[5] not in IVRS table
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : No southbridge IOAPIC found
+
+加上nowatchdog 关机更快 加上quiet 玄学
+参考文献
+https://askubuntu.com/questions/1392979/no-southbridge-ioapic-found
+https://superuser.com/questions/1052023/ioapic0-not-in-ivrs-table #这里讲到了如何寻找ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2
+
+
+7月 23 19:05:00 gg kernel: Bluetooth: hci0: Reading supported features failed (-16)
+通过安装 sudo pacman -S bluez bluez-utils
+
+
+
+
+
+
+
+
 

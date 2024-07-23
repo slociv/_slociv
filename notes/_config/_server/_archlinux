@@ -213,7 +213,7 @@ yay -S upd72020x-fw wd719x-firmware aic94xx-firmware
 
 
 系统日志报错误
-
+//第一次安装错误
 [gg@agl ~]$ journalctl -p 3 -b
 5月 27 08:27:28 agl kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[4] not in IVRS table
 5月 27 08:27:28 agl kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[5] not in IVRS table
@@ -224,6 +224,18 @@ yay -S upd72020x-fw wd719x-firmware aic94xx-firmware
 5月 27 08:27:42 agl systemd[1011]: Failed to start Application launched by gnome-session-binary.
 5月 27 08:27:42 agl systemd[1011]: Failed to start Application launched by gnome-session-binary.
 [gg@agl ~]$
+//第二次安装错误
+[slociv@gg ~]$ journalctl -p 3 -b
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[4] not in IVRS table
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : IOAPIC[5] not in IVRS table
+7月 23 19:05:00 gg kernel: AMD-Vi: [Firmware Bug]: : No southbridge IOAPIC found
+7月 23 19:05:00 gg kernel: AMD-Vi: Disabling interrupt remapping
+7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: error -EBUSY: can't request region for resource [mem 0x8f7a2000-0x8f7a5fff]
+7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: probe with driver tpm_crb failed with error -16
+7月 23 19:05:00 gg kernel: Bluetooth: hci0: Reading supported features failed (-16)
+7月 23 19:06:30 gg systemd[1]: Timed out waiting for device /dev/tpmrm0.
+7月 23 19:06:38 gg lightdm[629]: gkr-pam: unable to locate daemon control file
+7月 23 19:09:45 gg lightdm[1745]: gkr-pam: unable to locate daemon control file
 
 
 
@@ -234,7 +246,7 @@ yay -S upd72020x-fw wd719x-firmware aic94xx-firmware
 egrep: warning: egrep is obsolescent; using grep -E
 00:00.2 IOMMU [0806]: Advanced Micro Devices, Inc. [AMD] Raven/Raven2 IOMMU [1022:15d1]
 00:14.0 SMBus [0c05]: Advanced Micro Devices, Inc. [AMD] FCH SMBus Controller [1022:790b] (rev 61)
-[gg@agl ~]$ sudo vim /etc/default/grub
+[gg@agl ~]$ sudo gvim /etc/default/grub
 
 改成这个GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2"
 

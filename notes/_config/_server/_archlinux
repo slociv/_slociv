@@ -23,9 +23,9 @@ sudo genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
 
-vim /etc/hostname
+sudo gvim /etc/hostname
 gg
-vim /etc/hosts
+sudo gvim /etc/hosts
 127.0.0.1   localhost
 ::1         localhost
 127.0.1.1   gg.localdomain gg

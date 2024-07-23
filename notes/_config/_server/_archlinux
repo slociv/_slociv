@@ -3,6 +3,7 @@ systemctl stop reflector.service
 iwctl station wlan0 connect ...
 
 pacman -Sy
+pacman -S archlinux-keyring
 
 timedatectl set-ntp  true
 

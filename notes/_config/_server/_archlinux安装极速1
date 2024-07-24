@@ -228,7 +228,13 @@ systemctl mask dev-tpmrm0.device
 
 7月 23 19:05:00 gg kernel: Bluetooth: hci0: Reading supported features failed (-16)
 
+sudo pacman -S bluez bluez-utils
 systemctl enable bluetooth
+
+sudo rfkill unblock bluetooth
+sudo systemctl stop bluetooth
+sudo systemctl status bluetooth
+sudo systemctl restart bluetooth
 Created symlink '/etc/systemd/system/dbus-org.bluez.service' → '/usr/lib/systemd/system/bluetooth.service'.
 Created symlink '/etc/systemd/system/bluetooth.target.wants/bluetooth.service' → '/usr/lib/systemd/system/bluetooth.service'.
 

@@ -215,10 +215,22 @@ https://superuser.com/questions/1052023/ioapic0-not-in-ivrs-table #这里讲到�
 systemctl enable bluetooth
 systemctl restart bluetooth.service
 
-6月新bug
+6月新bug,systemd 这个人真的搞事情
+7月 23 19:06:30 gg systemd[1]: Timed out waiting for device /dev/tpmrm0.
+systemctl mask dev-tpmrm0.device
+
+剩下这几个bug
 7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: error -EBUSY: can't request region for resource [mem 0x8f7a2000-0x8f7a5fff]
 7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: probe with driver tpm_crb failed with error -16
-systemctl mask dev-tpmrm0.device
+7月 23 19:05:00 gg kernel: Bluetooth: hci0: Reading supported features failed (-16)
+7月 23 19:06:38 gg lightdm[629]: gkr-pam: unable to locate daemon control file
+7月 23 19:09:45 gg lightdm[1745]: gkr-pam: unable to locate daemon control file
+
+7月 23 19:05:00 gg kernel: Bluetooth: hci0: Reading supported features failed (-16)
+
+systemctl enable bluetooth
+Created symlink '/etc/systemd/system/dbus-org.bluez.service' → '/usr/lib/systemd/system/bluetooth.service'.
+Created symlink '/etc/systemd/system/bluetooth.target.wants/bluetooth.service' → '/usr/lib/systemd/system/bluetooth.service'.
 
 
 

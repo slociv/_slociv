@@ -215,6 +215,11 @@ https://superuser.com/questions/1052023/ioapic0-not-in-ivrs-table #这里讲到�
 systemctl enable bluetooth
 systemctl restart bluetooth.service
 
+6月新bug
+7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: error -EBUSY: can't request region for resource [mem 0x8f7a2000-0x8f7a5fff]
+7月 23 19:05:00 gg kernel: tpm_crb MSFT0101:00: probe with driver tpm_crb failed with error -16
+systemctl mask dev-tpmrm0.device
+
 
 
 

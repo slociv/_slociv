@@ -1,0 +1,74 @@
+试过之后压根没有速度
+-racknerd
+
+apt update -y
+
+apt install sudo curl 
+apt-get install cron
+
+apt -y install wget unzip uuid-runtime socat 
+
+apt-get update
+apt-get upgrade
+apt-get upgrade linux-image-generic
+
+关闭防火墙
+systemctl status ufw
+systemctl stop ufw
+systemctl disable ufw
+
+开启bbr
+
+#查询支持的 TCP 拥塞控制算法
+sysctl net.ipv4.tcp_available_congestion_control
+#查询应用的 TCP 拥塞控制算法
+sysctl net.ipv4.tcp_congestion_control
+#启用 BBR TCP 拥塞控制算法
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+sysctl -p
+echo "tcp_bbr" >> /etc/modules-load.d/modules.conf
+
+申请域名证书
+#创建 Juicity 配置文件目录
+mkdir /etc/juicity
+#安装 acme.sh
+curl https://get.acme.sh | sh
+ln -s /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
+acme.sh --set-default-ca --server letsencrypt
+#申请域名证书
+#example.domain.com请替换为你的真实域名
+#注意：纯ipv6主机，在下面命令中加上--listen-v6参数
+acme.sh --issue -d example.domain.com --keylength ec-256 --standalone --insecure
+acme.sh --install-cert -d example.domain.com --ecc \
+        --key-file       /etc/juicity/example.domain.com.key  \
+        --fullchain-file /etc/juicity/example.domain.com.pem
+
+wget -O /tmp/juicity-linux-x86_64.zip https://github.com/juicity/juicity/releases/download/v0.4.3/juicity-linux-x86_64.zip
+unzip -d /tmp/juicity /tmp/juicity-linux-x86_64.zip
+mv /tmp/juicity/juicity-server /usr/bin
+#将 Juicity 作为守护进程运行
+mv /tmp/juicity/juicity-server.service /etc/systemd/system/
+#服务器端配置文件
+#可以使用 'uuidgen' 命令生成 UUID，使用 'openssl rand -base64 8' 命令生成 password 。
+cat > /etc/juicity/server.json <<EOF
+{
+    "listen": ":10086", 
+    "users": {
+        "UUID": "password"
+    },
+    "certificate": "/etc/juicity/example.domain.com.pem",
+    "private_key": "/etc/juicity/example.domain.com.key",
+    "congestion_control": "bbr",
+    "disable_outbound_udp443": true,
+    "log_level": "info"
+}
+EOF
+
+
+#启动 Juicity 服务端
+systemctl daemon-reload
+systemctl enable juicity-server
+systemctl start juicity-server
+#查看当前状态
+systemctl status juicity-server

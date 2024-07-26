@@ -1,0 +1,90 @@
+1.springboot 的概念
+Spring Boot makes it easy to create stand-alone, 
+production-grade Spring based Applications 
+that you can "just run"
+
+spring的概念
+Basically Spring is a framework for dependency-injection 
+which is a pattern 
+that allows building very decoupled systems.
+
+//几百个这种类似的视图应该如何实现？
+UserLister userLister = new UserListerDB();
+UserLister userLister = new UserListerCommaSeparatedFile();
+
+//最原始的spring所做的就是di依赖注入
+//让我们将xml或注解与大量的类连接起来
+//这样对象被spring初始化并注入到正确的地方（servlets.web frameworks
+,business classes dao ,etc.etc.etc)
+
+<bean id="userLister" class="UserListerDB" />
+
+<bean class="SomeView">
+    <property name="userLister" ref="userLister" />
+</bean>
+
+在我们写的类中只需要用@Inject
+@Inject
+private UserLister userLister;
+------------------spring框架最初的意义评论----------------------------------------------------------------------------
+2011年
+更改一行代码和更改一行 XML 有什么区别？工作量和维护难度完全相同，
+甚至更糟，因为外部 xml 文件无疑增加了复杂性？
+抱歉，我就是搞不懂，我根本看不到任何好处。
+如果我遗漏了什么，请告诉我。 
+– 
+弗雷德
+@fred 在此示例中，我们看到该UserLister对象仅被使用一次。
+所以是的，这里，可以选择“在 XML 中更改一行，或在代码中更改一行”。
+但现在，想象一下在UserLister多个类/包中使用的大型应用程序。
+现在很明显，您宁愿更改 XML 中的一行，
+也不愿找到类的每个用法并更改实例化（可能在十几个类中） 
+– 
+唐·钱德尔
+ 评论2015 年 4 月 14 日 16:05 
+
+Spring 适合那些不想花费精力去学习、思考和使用 API 的人……它什么也没产生，也解决不了什么问题。
+必须加载大量无用的 Spring 类和潜在的内存泄漏，并学习理解框架，这增加了复杂性，这是一种阻碍。
+除了说“是的，我知道如何编写 xml 配置，哈哈”，
+我认为它没有用处。无论如何，75 票赞成是不会错的……Spring 或多或少是一个无用的库，
+人们使用它的唯一原因是它很受欢迎。使用 Java 近 10 年来，我还没有看到一个有用的实现 
+– 
+尼肯
+ 评论2017年5月18日 18:41
+ @mamakin 确实如此...我见过 Spring 在一些实际项目中使用，但到目前为止，
+ 它显然总是出于纯粹的政治原因而被使用 
+ —— 只增加了不必要的复杂性，而没有解决任何实际问题或增加任何实际使用的灵活性。 
+– 
+罗杰里奥
+ 评论2017 年 9 月 8 日 0:23
+
+ 1
+我实际上希望看到 mvc、data、jpa 和 Spring 的其他部分可以选择不使用 Spring 的核心 DI，
+而是将 Dagger 置于 Spring 的核心。 
+– 
+德兰布林
+ 评论2019 年 4 月 3 日 13:55
+
+------------------spring框架意义评论----------------------------------------------------------------------------
+总结di 是个败笔，di是spring2011年左右使用的政治产物，
+也是他的核心功能，但是他不是个值得称赞的功能。
+因为写di就觉得代码像是吃了屎一样的难受，尽管他能简化代码
+但是他就是难受没有任何办法。spring如果去除了di也许会更受欢迎
+
+spring 是ejb2的替代品，但是新的ejb（部分jpa2）逐渐被接受
+
+我们可以用spring 但是我们不接受di
+我们或许可以接受di但是我们不能接受配置
+
+下面是一个评论
+--------------------------------------------------------------------------
+Spring 一开始是依赖注入，然后为几乎所有东西添加了包装器之王（JPA 实现上的包装器等）。
+
+长话短说...Spring 的大部分内容都偏爱 XML 解决方案（XML 脚本引擎...brrrr），因此对于 DI，我使用 Guice
+
+不错的库，但依赖性不断增长，例如Spring JDBC（可能是一个具有实名参数的 Java jdbc 解决方案）接下来需要从 maven 4-5 开始。
+
+使用 Spring MVC（“big spring” 的一部分）进行 Web 开发...它是“基于请求”的框架，有一场“请求与组件”的圣战...由你决定
+--------------------------------------------------------------------------
+
+spring在2015年左右尝试转向注释和java配置

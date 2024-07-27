@@ -47,9 +47,10 @@ sudo pacman-key --lsign-key "farseerfc@archlinux.org"
 sudo pacman -S archlinuxcn-keyring
 sudo pacman -S yay
 #pacman.conf 加上注释
-
+bluez bluez-utils
 #必须安装--必备软件
-sudo pacman -S bluez bluez-utils fish freerdp neofetch noto-fonts noto-fonts-cjk noto-fonts-emoji vscodium-bin flamshot telegram-desktop smplayer flamshot telegram-desktop 
+sudo pacman -S  fish freerdp2 neofetch noto-fonts noto-fonts-cjk noto-fonts-emoji vscodium-bin flamshot telegram-desktop smplayer 
+yay -S google-chrome
 
 // 可选sudo pacman -S gvfs-mtp nautilus
 // 可选yay -S jdk21-temurin baidunetdisk-bin tencent-docs-bin pepper-flash nutstore-experimental mybase-desktop-bin google-chrome

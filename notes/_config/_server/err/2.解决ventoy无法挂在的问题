@@ -1,0 +1,4 @@
+sudo pacman -S ntfs-3g
+sudo ntfsfix -d /dev/sdb1
+sudo mount -t ntfs3 /dev/sdb1 /mnt/Data
+正常打开u 盘

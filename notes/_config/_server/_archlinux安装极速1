@@ -22,7 +22,7 @@ vim /etc/pacmam.d/mirrorlist
 pacman -Sy
 pacman -S archlinux-keyring
 
-
+pacman -Sy  archinstall
 archinstall
 
 //不安装音频驱动

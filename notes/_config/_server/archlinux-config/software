@@ -1,0 +1,12 @@
+pacman -S ibus
+pacman -S ibus-rime
+
+vim ~/.xprofile
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus-daemon -x -d
+
+#一些使用技巧 f4 直接切换中文简体
+
+参考文献 https://blog.csdn.net/lxyoucan/article/details/127554289

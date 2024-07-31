@@ -1,4 +1,86 @@
-sudo vim 
+sudo gvim /etc/default/grub
+GRUB_CMDLINE_LINUX="vga=current ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2 iommu=pt idle=nomwait acpi_backlight=vendor acpi_enforce_resources=lax scsi_mod.use_blk_mq=1"
 
+sudo gvim /etc/mkinitcpio.conf
+MODULES=(amdgpu)
+
+sudo  mkinitcpio -P
+
+Blacklist modules
+
+sudo gvim /etc/modprobe.d/blacklist-mine
+blacklist tpm
+blacklist tpm_crb
+blacklist tpm_tis
+blacklist tpm_tis_core
+blacklist joydev
+blacklist kvm
+blacklist sp5100_tco
+blacklist psmouse
 
 参考文献 https://gitlab.com/cscs/linux-on-huawei-matebook-d-14-amd
+参考文献 https://forum.manjaro.org/t/high-power-consumption-on-matebook-d14-with-amd-ryzen-2500u-3500u-cpus-on-kernel-5-8/44178
+
+
+切换内核
+参考文献https://smj.im/blag/posts/how-to-change-archlinux-kernel/
+sudo pacman -S linux-amd linux-amd-headers
+
+sudo pacman -Rs linux-lts linux-lts-headers
+更新boot loader 配置
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+TLP
+
+sudo pacman -S --needed tlp tlp-rdw iw smartmontools ethtool x86_energy_perf_policy
+systemctl mask systemd-rfkill.service
+systemctl mask systemd-rfkill.socket
+systemctl enable tlp.service
+systemctl enable tlp-sleep.service
+
+
+lm_sensors
+
+sudo pacman -S lm_sensors && sudo sensors-detect && sudo pwmconfig
+
+amdgpu-fancontrol
+The project is here.
+Please make sure to follow lm_sensors instructions first.
+
+mkdir -p ~/.builds
+cd .builds
+git clone https://github.com/grmat/amdgpu-fancontrol.git
+cd amdgpu-fancontrol
+makepkg -sri
+systemctl enable amdgpu-fancontrol --now
+
+
+Touchpad
+Because of compatability with some applications (including 'gravity' scrolling in browsers) I have been using xf86-input-synaptics
+
+sudo pacman -S xf86-input-synaptics
+
+sudo pacman -S alsa-tools
+sudo hdajackretask
+
+Check "Show unconnected pins".
+Pin ID 0x14 > Override > "Internal speaker"
+Pin ID 0x1b > Override > "Internal speaker (Back)"
+"Apply" will fail with the device in use.
+Click "Install boot override"
+Reboot.
+
+You should notice the front speakers working now, but they dont produce bass.
+Because of this, or for any other reason, you may wish to decrease volume to these speakers only.
+Run alsamixer
+
+sudo pacman -S alsa-utils
+
+
+alsamixer
+
+
+
+Open device selection (F6)
+Select the device with the most options (Device:1, Realtek ALC256)
+Configure to your liking. Specifically notice the 'Front' slider. I have decreased this by ~10%.

@@ -1,0 +1,19 @@
+安装到网络的时候按esc选择最下边不设置网络
+设置镜像源nano /etc/apt/sources.list
+deb http://mirrors.ustc.edu.cn/debian buster main contrib non-free
+deb http://mirrors.ustc.edu.cn/debian buster-updates main contrib non-free
+deb http://mirrors.ustc.edu.cn/debian buster-backports main contrib non-free
+deb http://mirrors.ustc.edu.cn/debian-security/ buster/updates main contrib non-free
+一定要联网
+
+apt-get update
+
+apt-get dist-upgrade
+
+sudo reboot
+再次联网
+
+apt-get install firmware-amd-graphics libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers xserver-xorg-video-all
+重新启动系统以加载新安装的驱动程序。
+
+apt-get update

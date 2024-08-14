@@ -1,0 +1,67 @@
+sudo systemctl mask dev-tpmrm0.device
+
+sudo pacman-mirrors -i -c China -m rank
+勾选 http://mirrors.ustc.edu.cn/manjaro/，然后按 OK 键两次。
+
+sudo pacman -Sy yay
+yay -Sy fcitx-im fcitx-configtool
+yay -Sy gvim
+
+yay -Sy xdg-user-dirs-gtk
+export LANG=en_US.UTF-8  
+xdg-user-dirs-gtk-update  
+export LANG=zh_CN.UTF-8
+
+/etc/environment
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+
+yay -Sy base-devel
+yay -Sy fcitx-baidupinyin
+sudo reboot
+yay -Sy google-chrome
+yay -Sy fish
+chsh -l
+chsh -s /usr/bin/fish
+yay -Rns zsh manjaro-zsh-config zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting zsh-theme-powerlevel10k
+yay -Rns firefox
+sudo reboot
+
+
+[Arch4edu archlinuxcn软件仓库]
+sudo pacman-key --recv-keys 7931B6D628C8D3BA
+sudo pacman-key --finger 7931B6D628C8D3BA
+sudo pacman-key --lsign-key 7931B6D628C8D3BA
+sudo gvim /etc/pacman.conf
+[arch4edu]
+Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch
+[archlinuxcn]
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+dengdai 
+yay -Sy archlinuxcn-keyring
+
+yay -Sy v2raya
+
+yay -Sy alsa-tools
+sudo hdajackretask
+Check "Show unconnected pins".
+Pin ID 0x14 > Override > "Internal speaker"
+Pin ID 0x1b > Override > "Internal speaker (Back)"
+"Apply" will fail with the device in use.
+Click "Install boot override"
+Reboot.
+
+alsamixer
+yay -Sy xorg-xrandr
+xrandr --output eDP-1 --brightness 0.7
+
+
+sudo gvim  /etc/default/grub
+GRUB_CMDLINE_LINUX="vga=current ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2 iommu=pt idle=nomwait acpi_backlight=vendor acpi_enforce_resources=lax scsi_mod.use_blk_mq=1"
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo gvim  /etc/mkinitcpio.conf
+MODULES=(amdgpu)
+sudo mkinitcpio -P 

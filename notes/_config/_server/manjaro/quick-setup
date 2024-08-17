@@ -65,3 +65,6 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 sudo gvim  /etc/mkinitcpio.conf
 MODULES=(amdgpu)
 sudo mkinitcpio -P 
+
+
+yay -Sy powerstat

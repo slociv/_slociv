@@ -1,0 +1,30 @@
+1.至 Android-x86官網https://www.android-x86.org/download.html下載64位元，Android 9.0-r2的ISO https://sourceforge.net/projects/android-x86/
+
+
+2.開啟Virt Manager，點選編輯→偏好設定，勾選啟用XML編輯：
+
+3.點選左上角新增虛擬機，點選手動安裝
+
+4.安裝系統選Android-x86 9.0
+
+5.記憶體至少給4GB、CPU至少雙核心。
+
+6.建立64GB的虛擬硬碟。QCOW2硬碟檔案不會一次佔用64GB，而是慢慢吃滿。
+
+7.勾選在安裝前自訂配置
+
+8.點選左邊的系統概覽，晶片組選Q35，韌體選UEFI x64 OVMF_CODE。
+
+9.點選左邊的IDE磁碟，切換成SATA
+
+10.點選左邊的顯示協議，將監聽類型設定為無，勾選OpenGL，選擇Intel的顯示卡,勾选自己的显卡。
+
+11.點選左邊的顯示卡，選擇Virtio，並勾選3D加速。
+
+12.點選左下角新增硬體，加入CDROM，按選擇自訂儲存，選取Android-x86的ISO
+
+13.點選左邊的開機選項，設定開機順序為CDROM優先
+
+14.點選左上角開始安裝，開機進入Android後用鍵盤上下鍵移動到Installation後按Enter。
+
+更多看  https://ivonblog.com/posts/android-x86-virgl-libhoudini

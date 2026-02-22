@@ -1,0 +1,111 @@
+进入安装界面，此时退出所有程序，开始修改脚本
+定位脚本位置
+cd /etc/calamares/scripts/
+运行一次报错脚本生成另一个脚本文件
+sudo ./update-mirrorlist
+修改该文件直接井号注释country取值命令，给予country="CN"值，crtl+x输入y保存再次回车退出
+sudo nano /bin/cachyos-rate-mirrors
+锁定该文件不让联网下载覆盖
+sudo chattr +i /bin/cachyos-rate-mirrors
+此时可直接去运行安装程序，也可继续以下步骤，手动更新镜像源和密钥环，以确保成功无报错
+执行父脚本更新镜像
+sudo ./update-mirrorlist
+执行更新密钥环脚本
+sudo ./create-pacman-keyring
+在两个已经确保成功执行的脚本首行加入exit 0，让完整安装程序执行时直接跳过直接跳过
+sudo nano update-mirrorlist
+sudo nano create-pacman-keyring
+为两个脚本上锁
+sudo chattr +i update-mirrorlist
+sudo chattr +i create-pacman-keyring
+-----安装 fcitx5 与中文输入法模块
+sudo pacman -S fcitx5 fcitx5-im fcitx5-chinese-addons fcitx5-configtool fcitx5-qt fcitx5-gtk
+sudo nano /etc/environment
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+fcitx5 &
+
+
+-----解决系统启动时间过长tpm问题
+systemctl list-unit-files | grep -i tpm
+
+sudo systemctl mask systemd-tpm2-setup-early.service
+  sudo systemctl mask systemd-tpm2-setup.service
+  sudo systemctl mask tpm2.target
+
+  -----解决荣耀垃圾笔记本的错误
+
+
+sudo nano /etc/default/grub
+GRUB_CMDLINE_LINUX="vga=current ivrs_ioapic[4]=00:14.0 ivrs_ioapic[5]=00:00.2 iommu=pt idle=nomwait acpi_backlight=vendor acpi_enforce_resources=lax scsi_mod.use_blk_mq=1"
+
+sudo nano /etc/mkinitcpio.conf
+
+sudo mkinitcpio -P
+
+sudo nano /etc/modprobe.d/blacklist-mine
+
+blacklist tpm
+blacklist tpm_crb
+blacklist tpm_tis
+blacklist tpm_tis_core
+blacklist joydev
+blacklist kvm
+blacklist sp5100_tco
+blacklist psmouse
+
+
+----设置字体
+sudo pacman -S inter-font noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono
+
+
+~/.config/fontconfig/fonts.conf
+
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+
+  <!-- 默认英文字体 -->
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Inter</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans</family>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 默认中文字体 -->
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Serif CJK SC</family>
+      <family>Noto Serif</family>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 等宽字体（终端） -->
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>JetBrains Mono</family>
+      <family>Noto Sans Mono CJK SC</family>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 字体渲染优化 -->
+  <match target="font">
+    <edit name="hinting" mode="assign"><bool>true</bool></edit>
+    <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
+    <edit name="antialias" mode="assign"><bool>true</bool></edit>
+    <edit name="rgba" mode="assign"><const>rgb</const></edit>
+    <edit name="lcdfilter" mode="assign"><const>lcddefault</const></edit>
+  </match>
+
+</fontconfig>
+
+fc-cache -fv

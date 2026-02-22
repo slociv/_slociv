@@ -55,6 +55,7 @@ blacklist kvm
 blacklist sp5100_tco
 blacklist psmouse
 
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ----设置字体
 sudo pacman -S inter-font noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono
